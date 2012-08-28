@@ -1,7 +1,7 @@
 import requests
 
 from clint.textui import colored, puts, columns
-from config import get_token, get_username, get_password, have_auth_info
+from .config import get_token, get_username, get_password, have_auth_info
 
 import json
 import sys

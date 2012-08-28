@@ -4,8 +4,8 @@ import os
 from clint import args
 from clint.textui import colored, puts, indent
 
-from core import delete_gist, create_gist
-from config import login, make_config, write_config, config_file
+from .core import delete_gist, create_gist
+from .config import login, make_config, write_config, config_file
 
 
 def show_help():
