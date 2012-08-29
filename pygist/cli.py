@@ -15,6 +15,7 @@ def show_help():
     with indent(4):
         puts(colored.green('pygist login'))
         puts(colored.green('pygist create <file1> <file2> <fileN> "description"'))
+        puts(colored.green('pygist create paste "description"'))
         puts(colored.green('pygist delete <gist_id>'))
         puts('\n')
 
@@ -59,13 +60,16 @@ def begin():
             delete_gist(gist_id)
 
     elif args.get(0) == 'create':
-        if not args.files:
+        if args.get(1) == 'paste':
+            description = args.get(2) or ''
+            create_gist(paste=True, description=description)
+        elif not args.files:
             puts('{0}. {1}'.format(colored.blue('pygist'),
                  colored.red('You need to pass file as well to create a gist')))
         else:
             description = args.not_files.get(1) or ''
             files = args.files
-            create_gist(files, description)
+            create_gist(files=files, description=description)
 
     else:
         show_help()

@@ -32,14 +32,23 @@ def delete_gist(gist_id):
         sys.exit(-1)
 
 
-def create_gist(files, description):
+def get_clipboard():
+    import subprocess
+    data = subprocess.Popen(['pbpaste'], stdout=subprocess.PIPE)
+    return data.communicate()[0]
+
+
+def create_gist(files=None, description=None, paste=False):
     post_url = 'https://api.github.com/gists'
     username = get_username()
     password = get_password()
 
     post_dict = {'description': description, 'public': True}
-    file_name = lambda x: x.split('/')[-1]
-    post_dict['files'] = dict((file_name(file), {'content': open(file).read()}) for file in files)
+    if paste:
+        post_dict['files'] = {description: {'content': get_clipboard()}}
+    else:
+        file_name = lambda x: x.split('/')[-1]
+        post_dict['files'] = dict((file_name(file), {'content': open(file).read()}) for file in files)
 
     r = requests.post(post_url, auth=(username, password), data=json.dumps(post_dict))
     if r.status_code == 201:

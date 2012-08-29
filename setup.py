@@ -12,7 +12,7 @@ dependencies = ['clint2', 'requests']
 
 setup(
     name='pygist',
-    version='0.2',
+    version='0.21',
     description='a simple cli for interacting with github gists',
     url='https://github.com/Roasbeef/pygist',
     author='Olaoluwa Osuntokun',
